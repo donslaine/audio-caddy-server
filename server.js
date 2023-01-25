@@ -2,8 +2,10 @@ const mongoose = require('mongoose')
 const express = require('express')
 const cors = require('cors')
 
-const db = require('./config.db')
+const db = require('./config/db')
 const PORT = 8000
+
+const userRoutes = require('./routes/user_routes')
 
 mongoose.set('strictQuery', true)
 
@@ -13,6 +15,8 @@ mongoose.connect(db,  {
 })
 
 const app = express()
+
+app.use(userRoutes)
 
 app.use(cors({ origin: 'http://127.0.0.1:5500' }))
 
