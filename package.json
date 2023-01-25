@@ -1,0 +1,29 @@
+{
+  "name": "physical-media-database-server",
+  "version": "1.0.0",
+  "description": "physical media tracker server side",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donslaine/audio-caddy-server.git"
+  },
+  "author": "Paul Truitt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donslaine/audio-caddy-server/issues"
+  },
+  "homepage": "https://github.com/donslaine/audio-caddy-server#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "jwt-passport": "^0.0.5",
+    "mongoose": "^6.8.4",
+    "passport": "^0.6.0"
+  }
+}
