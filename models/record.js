@@ -25,7 +25,7 @@ const recordSchema = new Schema(
             type: Number,
             required: false,
         },
-        comment: [commentSchema],
+        comments: [commentSchema],
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'

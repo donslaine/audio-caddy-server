@@ -1,5 +1,3 @@
-// requireToken is removed for testing, don't forget to add it in later
-
 const express = require('express')
 const { handle404 } = require('../lib/custom_errors')
 const { requireToken } = require('../config/auth')
@@ -10,7 +8,7 @@ const router = express.Router()
 
 // INDEX
 // GET /characters
-router.get('/records', (req, res, next) => {
+router.get('/records', requireToken, (req, res, next) => {
     Record.find()
         .then(records => {
             return records.map(record => record)
@@ -23,7 +21,7 @@ router.get('/records', (req, res, next) => {
 
 // SHOW
 // GET /characters/:id
-router.get('/records/:id', (req, res, next) => {
+router.get('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
         .then(record => {
@@ -36,8 +34,9 @@ router.get('/records/:id', (req, res, next) => {
 
 // create paths
 // POST /record
-router.post('/records', (req, res, next) => {
-    // record.owner = req.user._id
+router.post('/records', requireToken, (req, res, next) => {
+    const record = req.body.record
+    record.owner = req.user._id
     Record.create(req.body.record)
         .then(record => {
             res.status(201).json({ record: record })
@@ -47,7 +46,7 @@ router.post('/records', (req, res, next) => {
 
 // UPDATE
 // PATCH /records/:id
-router.patch('/records/:id', (req, res, next) => {
+router.patch('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
         .then(record => {
@@ -59,7 +58,7 @@ router.patch('/records/:id', (req, res, next) => {
 
 // DELETE
 // DELETE /records/:id
-router.delete('/records/:id', (req, res, next) => {
+router.delete('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
         .then(record => {

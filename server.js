@@ -6,6 +6,7 @@ const db = require('./config/db')
 
 const userRoutes = require('./routes/user_routes')
 const recordRoutes = require('./routes/record_routes')
+const commentRoutes = require('./routes/comment_routes')
 
 const PORT = 8000
 
@@ -24,6 +25,7 @@ app.use(express.json())
 
 app.use(userRoutes)
 app.use(recordRoutes)
+app.use(commentRoutes)
 
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`)
