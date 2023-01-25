@@ -36,6 +36,6 @@ const recordSchema = new Schema(
     }
 )
 
-const Pet = mongoose.model('Record', recordSchema)
+const Record = mongoose.model('Record', recordSchema)
 
-module.exports = Pet
+module.exports = Record
