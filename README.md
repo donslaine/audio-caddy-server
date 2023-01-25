@@ -1,5 +1,7 @@
 # Audio Caddy - The media collection tracker
 
+Keep track of your physical audio collection!
+
 ## As a user
 - Version 1 / MVP
     - I want the ability to create an instance of a record in my collection because I am constantly buying new records.
