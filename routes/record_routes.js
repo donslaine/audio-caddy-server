@@ -7,9 +7,10 @@ const Record = require('../models/record')
 const router = express.Router()
 
 // INDEX
-// GET /characters
+// GET /records
 router.get('/records', requireToken, (req, res, next) => {
-    Record.find()
+    const user = req.user._id
+    Record.find({ "owner": user })
         .then(records => {
             return records.map(record => record)
         })
@@ -20,19 +21,18 @@ router.get('/records', requireToken, (req, res, next) => {
 })
 
 // SHOW
-// GET /characters/:id
+// GET /records/:id
 router.get('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
+        // .then(populate())
         .then(record => {
-            res.status(200).json({
-                record: record
-            })
+            res.status(200).json({ record: record })
         })
         .catch(next)
 })
 
-// create paths
+// CREATE
 // POST /record
 router.post('/records', requireToken, (req, res, next) => {
     const record = req.body.record
@@ -42,7 +42,7 @@ router.post('/records', requireToken, (req, res, next) => {
             res.status(201).json({ record: record })
         })
         .catch(next)
-})
+}) 
 
 // UPDATE
 // PATCH /records/:id

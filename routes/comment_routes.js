@@ -27,25 +27,6 @@ router.post('/comments', requireToken, (req, res, next) => {
         .catch(next)
 })
 
-// UPDATE
-// PATCH /comments/:id
-router.patch('/comments/:commentId', requireToken, (req, res, next) => {
-    const recordId = req.body.comment.recordId
-    
-    Record.findById(recordId)
-        .then(handle404)
-        .then(record => {
-            const comment = record.comments.id(req.params.commentId)
-            console.log(comment)
-            const commentBody = req.body.comment
-            comment.set(commentBody)
-
-            return record.save()
-        })
-        .then(() => res.sendStatus(204))
-        .catch(next)
-})
-
 // DELETE
 // DELETE /comments/:commentId
 router.delete('/comments/:commentId', requireToken, (req, res, next) => {
