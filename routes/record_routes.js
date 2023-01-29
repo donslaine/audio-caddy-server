@@ -25,7 +25,6 @@ router.get('/records', requireToken, (req, res, next) => {
 router.get('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
-        // .then(populate())
         .then(record => {
             res.status(200).json({ record: record })
         })
