@@ -34,8 +34,13 @@ router.delete('/comments/:commentId', requireToken, (req, res, next) => {
     Record.findById(recordId)
         .then(handle404)
         .then(record => {
-            record.comments.id(req.params.commentId).remove()
-
+            record.comments.forEach(comment => {
+                if (comment.owner.equals(req.user._id)) {
+                    record.comments.id(req.params.commentId).remove()
+                } else {
+                    res.sendStatus(401)
+                }
+            })
             return record.save()
         })
         .then(() => res.sendStatus(204))

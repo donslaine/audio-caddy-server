@@ -49,7 +49,11 @@ router.patch('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
         .then(record => {
-            return record.updateOne(req.body.record)
+            if(record.owner.equals(req.user._id)) {
+                return record.updateOne(req.body.record)
+            } else {
+                res.sendStatus(401)
+            } 
         })
         .then(() => res.sendStatus(204))
         .catch(next)
@@ -61,7 +65,11 @@ router.delete('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
         .then(record => {
-            return record.deleteOne()
+            if (record.owner.equals(req.user._id)) {
+                return record.deleteOne()
+            } else {
+                res.sendStatus(401)
+            }
         })
         .then(() => res.sendStatus(204))
         .catch(next)
