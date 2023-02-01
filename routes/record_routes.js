@@ -8,6 +8,7 @@ const router = express.Router()
 
 // INDEX
 // GET /records
+// filtered by user so only the logged in user's collection is shown
 router.get('/records', requireToken, (req, res, next) => {
     const user = req.user._id
     Record.find({ "owner": user })
@@ -49,6 +50,7 @@ router.patch('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
         .then(record => {
+            // only the user who created the record can edit it
             if(record.owner.equals(req.user._id)) {
                 return record.updateOne(req.body.record)
             } else {
@@ -65,6 +67,7 @@ router.delete('/records/:id', requireToken, (req, res, next) => {
     Record.findById(req.params.id)
         .then(handle404)
         .then(record => {
+            // only the user who created the record can delete it
             if (record.owner.equals(req.user._id)) {
                 return record.deleteOne()
             } else {

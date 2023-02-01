@@ -35,6 +35,7 @@ router.delete('/comments/:commentId', requireToken, (req, res, next) => {
         .then(handle404)
         .then(record => {
             record.comments.forEach(comment => {
+                // only the user who created the comment can delete it
                 if (comment.owner.equals(req.user._id)) {
                     record.comments.id(req.params.commentId).remove()
                 } else {
