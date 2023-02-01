@@ -22,7 +22,7 @@ Keep track of your record collection! I am an avid record collector, and I thoug
 
 ## Routes Table
 
-|---------|---------------|-----------|-----------------------------------------|
+
 |  Name   |     Path      | HTTP Verb |                  Purpose                |
 |---------|---------------|-----------|-----------------------------------------|
 | Index   | /records      | GET       | Displays all records of the current user|
@@ -30,10 +30,7 @@ Keep track of your record collection! I am an avid record collector, and I thoug
 | Show    | /record       | GET       | Shows a single record                   |
 | Update  | /records/:id  | PATCH     | Updates a single record's fields        |
 | Delete  | /records/:id  | DELETE    | Deletes a single record                 |
-|---------|---------------|-----------|-----------------------------------------|
 | Create  | /comments     | POST      | Creates a new comment on a record       |
 | Delete  | /comments/:id | DELETE    | Deletes a comment                       |
-|---------|---------------|-----------|-----------------------------------------|
 | Create  | /sign-up      | POST      | Creates a new user                      |
 | Create  | /sign-in      | POST      | Logs user in, creates new token         |
-|-------------------------------------------------------------------------------|
